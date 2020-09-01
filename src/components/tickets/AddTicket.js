@@ -8,7 +8,10 @@ import { startAddTicket } from '../../actions/ticketAction'
 function AddTicket(props){
     
     const handleTicketSubmit = (ticket) => {
-        props.dispatch(startAddTicket(ticket))
+        const redirect = () => {
+            props.history.push('/tickets')
+        }
+        props.dispatch(startAddTicket(ticket, redirect))
     }
 
     return (

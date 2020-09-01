@@ -3,6 +3,8 @@ import React from 'react'
 
 // import { startAddDepartment } from '../../actions/departmentAction'
 
+import { Container, Form, Row, Col } from 'react-bootstrap'
+
 class DepartmentForm extends React.Component{
 
     constructor(props){
@@ -33,17 +35,22 @@ class DepartmentForm extends React.Component{
 
     render(){
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <input 
-                        type="text"
-                        name="name" 
-                        value={this.state.name}
-                        onChange={this.handleChange}
-                    /><br/><br/>
-                    <input type="submit" value="Add" />
-                </form>
-            </div>
+            <Container>
+                <Row>
+                    <Col md={4}>
+                            <h2 className="mt-5" >Add Department</h2>
+                                <Form onSubmit={this.handleSubmit}>
+                                    <Form.Control
+                                        type="text"
+                                        name="name" 
+                                        value={this.state.name}
+                                        onChange={this.handleChange}
+                                    /><br/><br/>
+                                    <input type="submit" value="Add" className="btn btn-secondary" />
+                                </Form>
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }

@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { Container, Form } from 'react-bootstrap'
+
 class EmployeeForm extends React.Component{
 
     constructor(props){
@@ -43,11 +45,11 @@ class EmployeeForm extends React.Component{
 
     render(){
         return(
-            <div>
+            <Container>
                 {/* <h1>Add Employee</h1> */}   
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="name">Name:-</label>
-                    <input 
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Label htmlFor="name">Name:-</Form.Label>
+                    <Form.Control 
                         type="text"
                         id="name"
                         name="name"
@@ -55,8 +57,8 @@ class EmployeeForm extends React.Component{
                         onChange={this.handleChange}
                     /> <br/><br/>
 
-                    <label htmlFor="email">Email:-</label>
-                    <input 
+                    <Form.Label htmlFor="email">Email:-</Form.Label>
+                    <Form.Control 
                         type="text"
                         id="email"
                         name="email"
@@ -64,8 +66,8 @@ class EmployeeForm extends React.Component{
                         onChange={this.handleChange}
                     /> <br/><br/>
 
-                    <label htmlFor="mobile">Mobile:-</label>
-                    <input 
+                    <Form.Label htmlFor="mobile">Mobile:-</Form.Label>
+                    <Form.Control
                         type="mobile"
                         id="mobile"
                         name="mobile"
@@ -73,17 +75,17 @@ class EmployeeForm extends React.Component{
                         onChange={this.handleChange}
                     /> <br/><br/>
 
-                    <label htmlFor="department">Department:-</label>
-                    <select  onChange={this.handleChange} name="department">
+                    <Form.Label htmlFor="department">Department:-</Form.Label>
+                    <Form.Control  as="select"  onChange={this.handleChange} name="department">
                     <option value="">select</option>
                         {this.props.department.map(depart=>{
                              return < option key={depart._id} value={depart._id}>{depart.name} </option>
                         })}
-                    </select>
+                    </Form.Control>
                     <br/><br/>
-                    <input type="submit" value="Submit" />
-                </form>
-            </div>
+                    <input type="submit" value="Submit" className="btn btn-secondary" />
+                </Form>
+            </Container>
         )
     }
 }

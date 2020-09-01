@@ -1,24 +1,36 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import {connect} from 'react-redux'
+import { connect} from 'react-redux'
 
 import { startRemoveEmployee } from '../../actions/employeeAction'
+import { Container, Table } from 'react-bootstrap'
+import swal from "sweetalert"
 
 function Employee(props){
 
     const handleRemove = (id) => {
-        const confirm = window.confirm('are you sure')  
-        if(confirm){
-        props.dispatch(startRemoveEmployee(id))
-        }
+        swal({
+            title: "Are you sure ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal("Successfully Deleted", {	
+                icon: "success",
+              });
+              props.dispatch(startRemoveEmployee(id)) 
+            } 
+          })
     }
 
     return (
-        <div>
-            <h1>Employees - {props.employee.length} </h1>
+        <Container>
+            <h1 className="mt-5" >Employees - {props.employee.length} </h1>
 
-            <table border="1" cellSpacing="0">
-                <thead>
+            <Table responsive striped >
+                <thead className="thead-dark" >
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
@@ -39,8 +51,8 @@ function Employee(props){
                                        <td> {ele.email} </td>
                                        <td> {ele.mobile} </td>
                                        <td> {props.department.filter(dept => dept._id === ele.department).map(em => em.name) } </td>
-                                       <td> <Link to={`/employees/${ele._id}`} ><button>show</button></Link> </td>
-                                       <td> <button onClick={ () => {
+                                       <td> <Link to={`/employees/${ele._id}`} ><button className="btn btn-info" >show</button></Link> </td>
+                                       <td> <button className="btn btn-danger" onClick={ () => {
                                             handleRemove(ele._id)
                                        } } >remove</button> </td>
                                    </tr>
@@ -48,9 +60,9 @@ function Employee(props){
                            })
                        }
                 </tbody>
-            </table>
+            </Table>
             <Link to="/employees/addemployee">Add Employee</Link>
-        </div>
+        </Container>
     )
 }
 

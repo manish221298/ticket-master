@@ -1,4 +1,5 @@
 import React from 'react'
+import { Container, Form } from 'react-bootstrap'
 // import { connect } from 'react-redux'
 //import {startAddCustomers}  from '../../actions/customerAction'
 
@@ -42,11 +43,12 @@ class CustomerForm extends React.Component{
 
     render(){
         return(
-            <div>
-                <h1>Add Customer</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="name">Name:-</label>
-                    <input 
+            <Container>
+           
+                <h1 className="mt-5" >Add Customer</h1>
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Label htmlFor="name">Name:-</Form.Label>
+                    <Form.Control 
                         type="text"
                         id="name"
                         name="name"
@@ -54,8 +56,8 @@ class CustomerForm extends React.Component{
                         onChange={this.handleChange}
                     /> <br/><br/>
 
-                    <label htmlFor="email">Email:-</label>
-                    <input 
+                    <Form.Label htmlFor="email">Email:-</Form.Label>
+                    <Form.Control 
                         type="text"
                         id="email"
                         name="email"
@@ -63,17 +65,18 @@ class CustomerForm extends React.Component{
                         onChange={this.handleChange}
                     /> <br/><br/>
 
-                    <label htmlFor="mobile">Phone:-</label>
-                    <input 
+                    <Form.Label htmlFor="mobile">Phone:-</Form.Label>
+                    <Form.Control 
                         type="mobile"
                         id="mobile"
                         name="mobile"
                         value={this.state.mobile}
                         onChange={this.handleChange}
                     /> <br/><br/>
-                    <input type="submit" value="Submit" />
-                </form>
-            </div>
+                    <input type="submit" value="Submit" className="btn btn-secondary" />
+                </Form>
+            
+            </Container>
         )
     }
 }

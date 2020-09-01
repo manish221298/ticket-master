@@ -1,13 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { Container } from 'react-bootstrap'
 
 function CustomerShow(props){
     //console.log(props)
     //console.log(props.customer)
     return (
-        <div>
-            <h1>Customer Show</h1>
+        <Container>
+            <h1 className="mt-5" >Customer Show</h1>
             {props.customer && (
                 <div>
                      <h2>{props.customer.name} - {props.customer.email} </h2>
@@ -15,7 +16,7 @@ function CustomerShow(props){
                 </div>
             )}
             
-        </div>
+        </Container>
     )
 }
 

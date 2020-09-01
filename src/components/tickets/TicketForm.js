@@ -1,17 +1,18 @@
 import React from 'react' 
 import { connect } from 'react-redux'
+import { Container, Form } from 'react-bootstrap'
 
 class TicketForm extends React.Component{
 
     constructor(props){
         super(props)
         this.state = {
-            code: '',
-            customer: '',
+            code: props.ticket ? props.ticket.code : '',
+            customer: props.ticket ? props.ticket.customer : '',
             department: '',
             employees: [],
-            message: '',
-            priority: ''
+            message: props.ticket ? props.ticket.message : '',
+            priority: props.ticket ? props.ticket.priority : ''
         }
     }
 
@@ -31,6 +32,7 @@ class TicketForm extends React.Component{
         message: this.state.message,
         priority: this.state.priority
         }
+        this.props.ticket && (formData.id = this.props.ticket._id)
         this.props.handleTicketSubmit(formData)
         console.log(formData)
     }
@@ -38,11 +40,11 @@ class TicketForm extends React.Component{
 
     render(){
         return (
-            <div>
+            <Container>
                 {/* <h1>Add ticket</h1> */}
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="code">Code:-</label>
-                    <input 
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Label htmlFor="code">Code:-</Form.Label>
+                    <Form.Control 
                         type="text"
                         id="code"
                         name="code"
@@ -50,31 +52,32 @@ class TicketForm extends React.Component{
                         onChange={this.handleChange}
                     /> <br/><br/>
 
-                    <label htmlFor="customer">Customer:-</label>
-                    <select onChange={this.handleChange} name="customer" >
+                    <Form.Label htmlFor="customer">Customer:-</Form.Label>
+                    <Form.Control as="select" onChange={this.handleChange} name="customer" >
                         <option>select</option>
                         {
                             this.props.customer.map(custom => {
                                 return <option key={custom._id} value={custom._id} > {custom.name} </option>
                             })
                         }
-                    </select>
+                    </Form.Control>
                      <br/><br/>
 
-                     <label htmlFor="department">Department:-</label>
-                    <select onChange={this.handleChange} name="department" >
+                     <Form.Label htmlFor="department">Department:-</Form.Label>
+                    <Form.Control as="select" onChange={this.handleChange} name="department" >
                         <option>select</option>
                         {
                             this.props.department.map(dept => {
                                 return <option key={dept._id} value={dept._id} > {dept.name} </option>
                             })
                         }
-                    </select>
+                    </Form.Control>
                      <br/><br/>
 
-                     <label htmlFor="employee">Employee:-</label>
-                     <select value={this.state.employees}
-                     name="employees"
+                     <Form.Label htmlFor="employee">Employee:-</Form.Label>
+                     {/* <select value={this.state.employees} */}
+                      <Form.Control as="select"
+                     name="employees"   
                       onChange={this.handleChange}>
                         <option value="select">select</option>
                         {
@@ -87,20 +90,20 @@ class TicketForm extends React.Component{
                                 )
                             })   
                         }
-                    </select>
+                    </Form.Control>
                     <br/><br/>
 
-                    <label htmlFor="message">Message:-</label>
-                    <textarea 
-                        type="text"
+                    <Form.Label htmlFor="message">Message:-</Form.Label>
+                    <Form.Control as="textarea" row="5"
+                        type="textarea"
                         id="message"
                         name="message"
                         value={this.state.message}
                         onChange={this.handleChange}
                     /> <br/><br/>
 
-                    <label><h3>Priority</h3></label>
-                    <label>High</label>
+                    <Form.Label><h3>Priority</h3></Form.Label><br/> 
+                    <label>Medium</label>
                     <input type="radio"
                         value="High"
                         checked= {this.state.priority === "High"} 
@@ -122,9 +125,9 @@ class TicketForm extends React.Component{
                         name="priority"/>
                     <br/><br/>
 
-                    <input type="submit" value="Submit" />
-                </form>
-            </div>
+                    <input type="submit" value="Submit" className="btn btn-secondary" />
+                </Form>
+            </Container>
         )
     }
 }

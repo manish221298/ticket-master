@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import { startRegisterUser } from '../../actions/userAction'
 
+import { Container, Form } from 'react-bootstrap'
+
 class Register extends React.Component{
 
     constructor(props) {
@@ -44,34 +46,36 @@ class Register extends React.Component{
     render(){
         return(
             <div>
-                <h1>Register with us</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="username"> username </label>
-                    <input 
-                        type="text"
-                        id="username"
-                        name="username"
-                        value={this.state.username}
-                        onChange={this.handleChange}
-                    /><br/>
-                    <label htmlFor="email"> email </label>
-                    <input 
-                        type="text"
-                        id="email"
-                        name="email"
-                        value={this.state.email}
-                        onChange={this.handleChange}
-                    /><br/>
-                    <label htmlFor="password"> password </label>
-                    <input 
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                    /><br/>
-                    <input type="submit" value="Register" />
-                </form>
+                <Container>
+                    <h1 className="text-center mt-5 text-secondary" >Register with us</h1>
+                    <Form onSubmit={this.handleSubmit}>
+                        <Form.Label htmlFor="username"> username </Form.Label>
+                        <Form.Control 
+                            type="text"
+                            id="username"
+                            name="username"
+                            value={this.state.username}
+                            onChange={this.handleChange}
+                        /><br/>
+                        <Form.Label htmlFor="email"> email </Form.Label>
+                        <Form.Control 
+                            type="text"
+                            id="email"
+                            name="email"
+                            value={this.state.email}
+                            onChange={this.handleChange}
+                        /><br/>
+                        <Form.Label htmlFor="password"> password </Form.Label>
+                        <Form.Control 
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                        /><br/>
+                        <input type="submit" value="Register" className="btn btn-secondary" />
+                    </Form>
+                </Container>
             </div>
         )
     }

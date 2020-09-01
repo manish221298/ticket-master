@@ -1,4 +1,5 @@
 import axios from "../config/axios"
+import swal from "sweetalert"
 
 export const setEmployee = (employee) => {
     return { type: 'SET_EMPLOYEE', payload: employee }
@@ -34,7 +35,10 @@ export const startAddEmployee = (formData, redirect) => {
                 alert(response.data.message)
             }
             else{
-                alert('successfully added')
+                swal({
+                    title: 'successfully added',
+                    icon: "success"
+                })
                 const employee = response.data
                 dispatch(addEmployee(employee))
                 redirect()
@@ -50,6 +54,7 @@ export const removeEmployee = (employee) => {
 export const startRemoveEmployee = (id) => {
     return (dispatch) => {
         axios.delete(`/employees/${id}`, {
+            
             headers: {
                 'x-auth': localStorage.getItem('authToken')
             }
@@ -77,7 +82,10 @@ export const startEditEmployee = (employee, redirect) => {
                 alert(response.data.message)
             }
             else{
-                alert('Updated successfully')
+                swal({
+                    title: "successfully updated",
+                    icon: "success"
+                })
                 const employee = response.data 
                 dispatch(editEmployee(employee))
                 redirect()

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {startAddEmployee}  from '../../actions/employeeAction'
 import EmployeeForm from './EmployeeForm'
+import { Container } from 'react-bootstrap'
 
 class AddEmployee extends React.Component{
 
@@ -14,10 +15,10 @@ class AddEmployee extends React.Component{
 
     render(){
         return (
-            <div>
-                <h2>Add Employee</h2>
+            <Container>
+                <h2 className="mt-5" >Add Employee</h2>
                 <EmployeeForm handleEmployeeSubmit = {this.handleEmployeeSubmit} />
-            </div>
+            </Container>
         )
     }
     

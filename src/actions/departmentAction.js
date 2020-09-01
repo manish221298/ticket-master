@@ -1,4 +1,5 @@
 import axios from "../config/axios"
+import swal from "sweetalert"
 
 export const AddDepartment = (department) => {
     return { type: 'ADD_DEPARTMENT', payload: department }
@@ -17,7 +18,10 @@ export const startAddDepartment = (formData, redirect) => {
                 alert(response.data.message)
             }
             else{
-                alert('successfully added')
+                swal({
+                    title: "successfull added",
+                    icon: "success"
+                })
                 const department = response.data
                 dispatch(AddDepartment(department))
             }
@@ -77,7 +81,10 @@ export const startEditDepartment = (department, redirect) => {
                 alert(response.data.message)
             }
             else{
-                alert('successfully updated')
+                swal({
+                    title: 'updated successfully',
+                    icon: "success"
+                })
                 const department = response.data
                 dispatch(editDepartment(department))
                 redirect()

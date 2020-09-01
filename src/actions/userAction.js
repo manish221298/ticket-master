@@ -43,7 +43,7 @@ export const startLoginUser = (formData, redirect) => {
                 .catch((err) => {
                     alert(err)
                 })
-                redirect()
+                 redirect()
             }
         })
         .catch((err) => {

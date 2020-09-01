@@ -1,9 +1,12 @@
 import axios from "../config/axios"
+import React from 'react'
+//import { Alert } from 'react-bootstrap'
+import swal from 'sweetalert';
 
 export const AddCustomers = (customer) => {
     return { type:'ADD_CUSTOMERS', payload:customer }
 }
-
+	
 export const startAddCustomers = (formData, redirect) => {
     return (dispatch) =>{
         axios.post('/customers', formData, {
@@ -11,13 +14,16 @@ export const startAddCustomers = (formData, redirect) => {
                 'x-auth': localStorage.getItem('authToken')
             }
         })
-        .then((response) => {
+        .then((response) => {	
             //console.log(response.data)
             if(response.data.hasOwnProperty('errors')){
                 alert(response.data.message)
             }
             else{
-                alert('successfully added')
+                swal({
+                    title:'successfully added',
+                    icon: 'success'
+                })
                 const customer = response.data
                 redirect()
                 dispatch(AddCustomers(customer))
@@ -79,7 +85,10 @@ export const startEditCustomer = (customer, redirect) => {
                 alert(response.data.message)
             }
             else{
-                alert('Updated successfully')
+                swal({
+                    title:'Updated successfully',
+                    icon: 'success'
+                })
                 const customer = response.data 
                 dispatch(editCustomer(customer))
                 redirect()

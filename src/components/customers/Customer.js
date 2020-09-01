@@ -1,29 +1,36 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { Container, Table, Button } from 'react-bootstrap' 
 
 import { startRemoveCustomer} from '../../actions/customerAction'
+import swal from 'sweetalert'
 
 function Customer(props){
     //console.log(props.customer)
 
     const handleRemove = (id) => {
-        const confirmRemove = window.confirm('are you sure')
-        if(confirmRemove){
-        props.dispatch(startRemoveCustomer(id))
-        }
+        swal({
+            title: "Are you sure ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal("Successfully Deleted", {	
+                icon: "success",
+              });
+              props.dispatch(startRemoveCustomer(id)) 
+            } 
+          })
     }
 
-    // const handleShow = (id) => {
-    //     props.history.push(`/customershow/${id}`)
-    // }
-
-    
         return(
-            <div>
-                <h1>Customers - {props.customer.length} </h1>
-                <table border="1" cellSpacing="0">
-                <thead>
+            <Container>
+                <h1 className="mt-5" >Customers - {props.customer.length} </h1>
+                <Table striped responsive>
+                <thead className="thead-dark" >
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
@@ -42,16 +49,16 @@ function Customer(props){
                                        <td> {ele.name} </td>
                                        <td> {ele.email} </td>
                                        <td> {ele.mobile} </td>
-                                       <td><Link to={`/customers/${ele._id}`}><button>show</button></Link></td>
-                                       <td> <button onClick={ () => handleRemove(ele._id)}>remove</button> </td>
+                                       <td><Link to={`/customers/${ele._id}`}><Button className="btn btn-info   " >show</Button></Link></td>
+                                       <td> <Button className="btn btn-danger" onClick={ () => handleRemove(ele._id)}>remove</Button> </td>
                                    </tr>
                                )
                            })
                        }
                 </tbody>
-            </table>
+            </Table>
             <Link to="/customers/addcustomer/customer">Add Customer</Link>
-            </div>
+            </Container>
         )
 }
 
